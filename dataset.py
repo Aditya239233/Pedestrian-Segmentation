@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import torch
 
-class Dataset(object):
+class Dataset(torch.utils.data.Dataset):
     def __init__(self, root: str, transforms = None):
         self.root = root
         self.transforms = transforms
@@ -35,7 +35,7 @@ class Dataset(object):
             boxes.append([xmin, ymin, xmax, ymax]) #bounding boxes
 
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
-        labels = torch.as_tensor((num_objs), dtype=torch.int64)
+        labels = torch.ones((num_objs), dtype=torch.int64)
         masks = torch.as_tensor(masks, dtype=torch.uint8)
         image_idx = torch.as_tensor((idx))
         area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0]) # Area of bounding box

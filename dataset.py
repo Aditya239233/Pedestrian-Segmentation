@@ -12,8 +12,8 @@ class Dataset(object):
         self.masks = list(sorted(os.listdir(os.path.join(root, "PedMasks"))))
     
     def __getitem__(self, idx: int):
-        image_path = self.images[idx]
-        mask_path = self.masks[idx]
+        image_path = self.root + "PNGImages/" + self.images[idx] 
+        mask_path = self.root + "PedMasks/" + self.masks[idx]
 
         image = Image.open(image_path)
         mask = Image.open(mask_path)
